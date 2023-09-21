@@ -42,7 +42,7 @@ public class NetworkPlayer : MonoBehaviour
         photonView = GetComponent<PhotonView>();
 		 XROrigin  rig = FindObjectOfType<XROrigin>();
 		  
-		
+
 		 headRig = GameObject.Find("XR Rig/Camera Offset/Main Camera").transform;
 		leftHandRig = GameObject.Find("XR Rig/Camera Offset/LeftHand Controller").transform;
 		rightHandRig = GameObject.Find("XR Rig/Camera Offset/RightHand Controller").transform;
