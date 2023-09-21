@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using Photon.Pun;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkPlayer : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class NetworkPlayer : MonoBehaviour
 		public int xMax=10;
 		public int yMax=10;
 		public int zMax=10;
+		private Transform headRig;
+		private Transform leftHandRig;
+		private Transform rightHandRig;
+		
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,12 @@ public class NetworkPlayer : MonoBehaviour
 		Vector3 offset2 = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax),  Random.Range(zMin, zMax));
 		
         photonView = GetComponent<PhotonView>();
+		XRRig rig = FindObjectOfType<XRRig>();
+		headRig = rig.transform.Find("Camera Offset/Main Camera");
+		leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
+		rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
+		
+		
 		spawnedSnowballPilePrefab = PhotonNetwork.Instantiate("SnowballPile",transform.position,transform.rotation);
 		spawnedSnowballPilePrefab.transform.position += offset;
 		
@@ -98,9 +109,9 @@ public class NetworkPlayer : MonoBehaviour
 			rightHand.gameObject.SetActive(false);
 			leftHand.gameObject.SetActive(false);
 			head.gameObject.SetActive(false);
-			MapPosition(head, XRNode.Head);
-			MapPosition(leftHand,XRNode.LeftHand);
-			MapPosition(rightHand,XRNode.RightHand);
+			MapPosition(head, headRig);
+			MapPosition(leftHand,leftHandRig);
+			MapPosition(rightHand,rightHandRig);
 			GameObject NetworkPlayer = photonView.gameObject;
 			NetworkPlayer.name = "NetworkPlayer" + photonView.ViewID;
 			spawnedSnowballPilePrefab.name ="SnowBallPile" + photonView.ViewID;
@@ -109,11 +120,11 @@ public class NetworkPlayer : MonoBehaviour
 		}
         
     }
-	void MapPosition(Transform target,XRNode node)
+	void MapPosition(Transform target,Transform rigTransform)
 	{
-		InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
-		InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation);
-		target.position = position;
-		target.rotation = rotation;
+		//InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
+		//InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation);
+		//target.position = rigTransform.position;
+		//target.rotation = rigTransform.rotation;
 	}
 }
