@@ -43,14 +43,11 @@ public class NetworkPlayer : MonoBehaviour
 		 XROrigin  rig = FindObjectOfType<XROrigin>();
 		  
 		
-		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/Main Camera");
-		headRig = GameObjectRig.transform;
-		 
-		
-		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/LeftHand Controller");
-		leftHandRig = GameObjectRig.transform;
-		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/RightHand Controller");
-		rightHandRig = GameObjectRig.transform;
+		//GameObjectRig = GameObject.Find("XR Rig/Camera Offset/Main Camera");
+		//headRig = GameObjectRig.transform;
+		 headRig = GameObject.Find("XR Rig/Camera Offset/Main Camera").transform;
+		leftHandRig = GameObject.Find("XR Rig/Camera Offset/LeftHand Controller").transform;
+		rightHandRig = GameObject.Find("XR Rig/Camera Offset/RightHand Controller").transform;
 		if (rightHandRig != null)
         {
             Debug.Log("rightHandRig found: " + rightHandRig.gameObject.name);
