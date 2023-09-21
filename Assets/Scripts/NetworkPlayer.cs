@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using Photon.Pun;
+using Unity.XR.CoreUtils;
+ 
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkPlayer : MonoBehaviour
@@ -28,19 +30,35 @@ public class NetworkPlayer : MonoBehaviour
 		private Transform headRig;
 		private Transform leftHandRig;
 		private Transform rightHandRig;
+		private GameObject GameObjectRig;
 		
     // Start is called before the first frame update
     void Start()
     {
+		
 		Vector3 offset = new Vector3( -2, 0,   2);
 		Vector3 offset2 = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax),  Random.Range(zMin, zMax));
 		
         photonView = GetComponent<PhotonView>();
-		XRRig rig = FindObjectOfType<XRRig>();
-		headRig = rig.transform.Find("Camera Offset/Main Camera");
-		leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
-		rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
+		 XROrigin  rig = FindObjectOfType<XROrigin>();
+		  
 		
+		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/Main Camera");
+		headRig = GameObjectRig.transform;
+		 
+		
+		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/LeftHand Controller");
+		leftHandRig = GameObjectRig.transform;
+		GameObjectRig = GameObject.Find("XR Rig/Camera Offset/RightHand Controller");
+		rightHandRig = GameObjectRig.transform;
+		if (rightHandRig != null)
+        {
+            Debug.Log("rightHandRig found: " + rightHandRig.gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("No rghtHandRig found in the scene.");
+        }
 		
 		spawnedSnowballPilePrefab = PhotonNetwork.Instantiate("SnowballPile",transform.position,transform.rotation);
 		spawnedSnowballPilePrefab.transform.position += offset;
@@ -111,7 +129,7 @@ public class NetworkPlayer : MonoBehaviour
 			head.gameObject.SetActive(false);
 			MapPosition(head, headRig);
 			MapPosition(leftHand,leftHandRig);
-			MapPosition(rightHand,rightHandRig);
+			//MapPosition(rightHand,rightHandRig);
 			GameObject NetworkPlayer = photonView.gameObject;
 			NetworkPlayer.name = "NetworkPlayer" + photonView.ViewID;
 			spawnedSnowballPilePrefab.name ="SnowBallPile" + photonView.ViewID;
@@ -124,7 +142,7 @@ public class NetworkPlayer : MonoBehaviour
 	{
 		//InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
 		//InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation);
-		//target.position = rigTransform.position;
-		//target.rotation = rigTransform.rotation;
+		target.position = rigTransform.position;
+		target.rotation = rigTransform.rotation;
 	}
 }
