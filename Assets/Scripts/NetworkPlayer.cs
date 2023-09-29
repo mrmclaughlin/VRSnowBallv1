@@ -12,6 +12,7 @@ public class NetworkPlayer : MonoBehaviour
 	public Transform head;
 	public Transform leftHand;
 	public Transform rightHand;
+	public Transform body;
 	private PhotonView photonView;
 	
 		public int xMin =-10;
@@ -23,6 +24,7 @@ public class NetworkPlayer : MonoBehaviour
 		private Transform headRig;
 		private Transform leftHandRig;
 		private Transform rightHandRig;
+		private Transform bodyRig;
 		private GameObject GameObjectRig;
 		
     // Start is called before the first frame update
@@ -40,7 +42,7 @@ public class NetworkPlayer : MonoBehaviour
 		 headRig = GameObject.Find("XR Rig/Camera Offset/Main Camera").transform;
 		leftHandRig = GameObject.Find("XR Rig/Camera Offset/LeftHand Controller").transform;
 		rightHandRig = GameObject.Find("XR Rig/Camera Offset/RightHand Controller").transform;
-		
+		bodyRig = GameObject.Find("XR Rig/Camera Offset/Main Camera").transform;
 		
 		
 	Color randomColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
@@ -60,12 +62,13 @@ public class NetworkPlayer : MonoBehaviour
     {
 		if (photonView.IsMine)
 		{
-			rightHand.gameObject.SetActive(false);
-			leftHand.gameObject.SetActive(false);
-			head.gameObject.SetActive(false);
+			rightHand.gameObject.SetActive(true);
+			leftHand.gameObject.SetActive(true);
+			head.gameObject.SetActive(true);
 			MapPosition(head, headRig);
 			MapPosition(leftHand,leftHandRig);
 			MapPosition(rightHand,rightHandRig);
+			MapPosition(body,bodyRig);
 			GameObject NetworkPlayer = photonView.gameObject;
 			NetworkPlayer.name = "NetworkPlayer" + photonView.ViewID;
 			
