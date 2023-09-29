@@ -65,10 +65,11 @@ public class NetworkPlayer : MonoBehaviour
 			rightHand.gameObject.SetActive(true);
 			leftHand.gameObject.SetActive(true);
 			head.gameObject.SetActive(true);
+			body.gameObject.SetActive(true);
 			MapPosition(head, headRig);
 			MapPosition(leftHand,leftHandRig);
 			MapPosition(rightHand,rightHandRig);
-			MapPosition(body,bodyRig);
+			MapPositionOnly(body,bodyRig);
 			GameObject NetworkPlayer = photonView.gameObject;
 			NetworkPlayer.name = "NetworkPlayer" + photonView.ViewID;
 			
@@ -79,5 +80,29 @@ public class NetworkPlayer : MonoBehaviour
 	{
 		target.position = rigTransform.position;
 		target.rotation = rigTransform.rotation;
+	}
+	
+	
+	void MapPositionOnly(Transform target,Transform rigTransform)
+	{
+		target.position = rigTransform.position;
+		
+		Quaternion sourceRotation = rigTransform.rotation;
+    Quaternion targetRotation = target.rotation;
+
+    // Decompose the source and target rotations into Euler angles
+    Vector3 sourceEulerAngles = sourceRotation.eulerAngles;
+    Vector3 targetEulerAngles = targetRotation.eulerAngles;
+
+    // Copy the  y rotations from the source
+   
+    targetEulerAngles.y = sourceEulerAngles.y;
+
+    // Re-compose the Quaternion for the target
+    target.rotation = Quaternion.Euler(targetEulerAngles);
+		
+		
+		
+		
 	}
 }
