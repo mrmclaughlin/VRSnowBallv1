@@ -223,14 +223,6 @@ MonoBehaviour:
   head: {fileID: 2233352617941511350}
   leftHand: {fileID: 4707283077099006642}
   rightHand: {fileID: 6518886112637373715}
-  snowballPrefab: {fileID: 442560357003895824, guid: 268d1df84085f4646a4edd86dd0ba398,
-    type: 3}
-  numberOfSnowballs: 50
-  areaRadius: 10
-  rows: 5
-  columns: 5
-  height: 5
-  spacing: 2
   xMin: -10
   yMin: -10
   zMin: -10

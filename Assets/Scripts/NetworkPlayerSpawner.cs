@@ -6,14 +6,15 @@ using Photon.Pun;
 public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
 	private GameObject spawnedPlayerPrefab;
-	private GameObject spawnedSnowballPrefab;
-	 
-	GameObject[] mySnowBalls;
+	
+	 private AudioSource audioSource;
+	
    public override void OnJoinedRoom(){
 	base.OnJoinedRoom();
 	spawnedPlayerPrefab = PhotonNetwork.Instantiate("Network Player",transform.position,transform.rotation);
 		
-	
+	audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
 	 
 	 
    }
