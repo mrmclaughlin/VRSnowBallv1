@@ -569,6 +569,7 @@ MonoBehaviour:
   leftHand: {fileID: 6518886112637373715}
   rightHand: {fileID: 4707283077099006642}
   body: {fileID: 2187236212094873480}
+  can: {fileID: 2963154290129519555, guid: 8ddc6f3b9a64c6a49948d22d5d2fa59d, type: 3}
   xMin: -10
   yMin: -10
   zMin: -10

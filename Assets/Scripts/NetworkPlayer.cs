@@ -13,6 +13,7 @@ public class NetworkPlayer : MonoBehaviour
 	public Transform leftHand;
 	public Transform rightHand;
 	public Transform body;
+	public Transform can;
 	private PhotonView photonView;
 	
 		public int xMin =-10;
@@ -70,10 +71,12 @@ public class NetworkPlayer : MonoBehaviour
 			MapPosition(leftHand,leftHandRig);
 			MapPosition(rightHand,rightHandRig);
 			MapPositionOnly(body,bodyRig);
+			
 			GameObject NetworkPlayer = photonView.gameObject;
 			NetworkPlayer.name = "NetworkPlayer" + photonView.ViewID;
 			
 		}
+		
         
     }
 	void MapPosition(Transform target,Transform rigTransform)
