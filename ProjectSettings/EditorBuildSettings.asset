@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Create-with-VR-Starter-Scene.unity
+    path: Assets/Scenes/Lobby.unity
+    guid: 1f92dac0b08790e4dbd0738b7e18c498
+  - enabled: 1
+    path: Assets/Scenes/SnowBall Fight.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/SnowBall Fight 1.unity
+    guid: d1d6b1125153dfc44b03a33ae54df9fd
+  - enabled: 1
+    path: Assets/Scenes/SnowBall Fight 2.unity
+    guid: 1b6b4a543d2e99749b2f62a3619c4c01
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
       type: 2}
